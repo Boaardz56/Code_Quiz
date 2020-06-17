@@ -44,7 +44,7 @@ var questions = [
   //add text to Title tag
         startText.textContent = "Welcome to the Quiz";
   //add text to button
-         startBtn.textContent = "Start Quiz";
+        startBtn.textContent = "Start Quiz";
   //append text to container
         containerEl.appendChild(startText);
   //append button to container
@@ -54,8 +54,9 @@ var questions = [
 // function that shows the question and starts the timer
 function startQuiz() {
     //show timer fxn
-
+    timerEl.textContent = "90";
     //call next question function
+    nextQuestion();
 }
 
 //fxn that handles timer
@@ -63,7 +64,7 @@ function showTimer() {
     //display timer
     timerDisplay.textContent = timer;
     //create setInterval and store it to a variable
-    var timeinterval = setInterval(function () {
+    var timeInterval = setInterval(function () {
         timer--;
         timerDisplay.textContent = timer;
     // if timer goes down to 0, must clear the variable to stop
@@ -71,7 +72,7 @@ function showTimer() {
             clearInterval(timeInterval)
         }
     }, 1000)
-};e
+};
 
 //fxn that goes to next question
 function nextQuestion() {
@@ -86,7 +87,7 @@ function nextQuestion() {
 //create a div element to wrap "choices"
     var answersDiv = document.createElement("div");
 //for loop to:
-    for (let i = 0; i < currentQuestions.choices.length; i++) {
+    for (let i = 0; i < currentQuestion.choices.length; i++) {
     //create button elements for each loop
         var answerBtn = document.createElement("button");
     //add a class to each button to be used with eventListener
@@ -126,6 +127,8 @@ function checkAnswer(event) {
   startBtn.addEventListener("click", startQuiz);
   // add event listener to start timer
   document.addEventListener("click", checkAnswer);
+
+//   timeInterval.addEventListener("click", startTimer);
 
   //call the functions
   openingPage()
