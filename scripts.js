@@ -3,7 +3,7 @@ var questions = [
     {
       title: "Question 1: What symbol refers to an Id",
       choices: ["#", "$", ".", "{}"],
-      answer: "#"
+      answer: "0"
     },
     {
       title: "Example Question 2:",
@@ -28,14 +28,16 @@ var questions = [
 
   //=========================Declaring global variables==========================================
   //variable to store timer #
-  var timer = 90;
+  var timerLeft = 80;
   //variable to store current index, will start at 0 to start with first question
-  var index = 0;
+  var qindex = 0;
+  //variable for score total
+  var score = 0;
 
   //=============================== Functions ===================================================
 
   //FXN that shows heading and loads page at start
-  function openingPage() {
+function openingPage() {
   //add text to Title tag
         startText.textContent = "Welcome to the Quiz";
   //add text to button
@@ -48,9 +50,9 @@ var questions = [
 
 //FXN that shows the question and starts the timer
 function startQuiz() {
+    qindex = 0;
     //show timer fxn
-    timerEl.textContent = "90";
-        // containerEl.appendChild(timerEl);
+    showTimer();
     //call next question function
     nextQuestion();
 }
@@ -58,35 +60,33 @@ function startQuiz() {
 //FXN that handles timer
 function showTimer() {
     //display timer
-    timerDisplay.textContent = timer;
+    timerEl.textContent = timerLeft;
     //create setInterval and store it to a variable
-    var timeInterval = setInterval(function () {
-        document.querySelector(".timer").innerHTML=timer;
-        timer--;
-        // timerDisplay.textContent = timer;
-    // if timer goes down to 0, must clear the variable to stop
-        if(timer === 0) {
-            clearInterval(timeInterval);
-            alert("Out of time!");
-
-        }
+    var timeInterval = setInterval(function() {
+            timerLeft--;
+            timerEl.textContent = timerLeft;
+  // if timer goes down to 0, must clear the variable to stop
+            if(timerLeft === 0) {
+                clearInterval(timeInterval);
+            }    
     }, 1000);
 };
 
 //FXN that goes to next question
 function nextQuestion() {
 //declare a variable to store the current questions, then assign it
-    var currentQuestion = questions[index];
+    var currentQuestion = questions[qindex];
 //clear container element so questions don't appear on next questions
     containerEl.textContent = "";
 //add current question title to display the variable
     questionText.textContent = currentQuestion.title;
+    // console.log(`index inside next question is ${questionText}}`)
 //append the question display to the container
     containerEl.appendChild(questionText);
 //create a div element to wrap "choices"
     var answersDiv = document.createElement("div");
 //for loop to:
-    for (let index = 0; index < currentQuestion.choices.length; index++) {
+    for (let i = 0; i < currentQuestion.choices.length; i++) {
     //create button elements for each loop
         var answerBtn = document.createElement("button");
     //add a class to each button to be used with eventListener
@@ -105,16 +105,34 @@ function nextQuestion() {
 
 //FXN to check the answer and display to following question
 function checkAnswer(event) {
-//if event.target.matches
-    if(event.target.matches(".choiceBtn")) {
-    //logic to check for right answer
-    index ++;
-    nextQuestion()
+    // if division line with p tag deplays correct answer
+    console.log(`button text ${event.target.textContent}`);
+    console.log(`actual answer ${questions[qindex].answer}`);
 
+    if (event.target.textConent === questions[qindex].answer) {
+        qindex++;
+        nextQuestion();
+        writeMessage("Correct!")
     }
+    else {
+        qindex++;
+        timer -= 5;
+        nextQuestion();
+        writeMessage("Incorrect!")
+    }
+ }
 
-
+function writeMessage(message) {
+    var grade = document.createElement("param");
+    grade.textcontent = message;
+    containerEl.append(grade);
+    var resultTimer = setTimeout(function() {
+        grade.textContent = "";
+    
+    }, 3000);
 }
+
+
 
 
 
