@@ -1,9 +1,9 @@
 //Create questions as an Object. Follow example.
 var questions = [
     {
-      title: "Example Question 1:",
-      choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-      answer: "answer from choices"
+      title: "Question 1: What symbol refers to an Id",
+      choices: ["#", "$", ".", "{}"],
+      answer: "#"
     },
     {
       title: "Example Question 2:",
@@ -18,28 +18,23 @@ var questions = [
   //Hook timer element
   var timerEl = document.querySelector(".timer");
 
-  //Create dynamic elements 
-  //create h1 to show starting heading
+  //=====================Creating dynamic elements ==============================================
+    //create h1 to show starting heading
   var startText = document.createElement("h1");
   //create button to start quiz
   var startBtn = document.createElement("button");
   //create p tag to display question
   var questionText = document.createElement("p");
 
-  //Declare global variables
+  //=========================Declaring global variables==========================================
   //variable to store timer #
   var timer = 90;
   //variable to store current index, will start at 0 to start with first question
   var index = 0;
 
-  //======================== Function ===============================
-  //function that shows header and start button
-  //function that shows the question and starts the timer
-  //funtion that handles the timer
-  //function that handles the display of the question
-  //function to check the answer and display to the next question
+  //=============================== Functions ===================================================
 
-  //fxn that shows heading and loads page at start
+  //FXN that shows heading and loads page at start
   function openingPage() {
   //add text to Title tag
         startText.textContent = "Welcome to the Quiz";
@@ -51,30 +46,34 @@ var questions = [
         containerEl.appendChild(startBtn);
   }
 
-// function that shows the question and starts the timer
+//FXN that shows the question and starts the timer
 function startQuiz() {
     //show timer fxn
     timerEl.textContent = "90";
+        // containerEl.appendChild(timerEl);
     //call next question function
     nextQuestion();
 }
 
-//fxn that handles timer
+//FXN that handles timer
 function showTimer() {
     //display timer
     timerDisplay.textContent = timer;
     //create setInterval and store it to a variable
     var timeInterval = setInterval(function () {
+        document.querySelector(".timer").innerHTML=timer;
         timer--;
-        timerDisplay.textContent = timer;
+        // timerDisplay.textContent = timer;
     // if timer goes down to 0, must clear the variable to stop
-        if (timer === 0) {
-            clearInterval(timeInterval)
+        if(timer === 0) {
+            clearInterval(timeInterval);
+            alert("Out of time!");
+
         }
-    }, 1000)
+    }, 1000);
 };
 
-//fxn that goes to next question
+//FXN that goes to next question
 function nextQuestion() {
 //declare a variable to store the current questions, then assign it
     var currentQuestion = questions[index];
@@ -87,7 +86,7 @@ function nextQuestion() {
 //create a div element to wrap "choices"
     var answersDiv = document.createElement("div");
 //for loop to:
-    for (let i = 0; i < currentQuestion.choices.length; i++) {
+    for (let index = 0; index < currentQuestion.choices.length; index++) {
     //create button elements for each loop
         var answerBtn = document.createElement("button");
     //add a class to each button to be used with eventListener
@@ -104,7 +103,7 @@ function nextQuestion() {
 
 };
 
-//fxn to check the answer and display to following question
+//FXN to check the answer and display to following question
 function checkAnswer(event) {
 //if event.target.matches
     if(event.target.matches(".choiceBtn")) {
@@ -121,14 +120,14 @@ function checkAnswer(event) {
 
 
 
-
+// =========================Event Listeners===================================================
 
   // add event listener to start quiz
   startBtn.addEventListener("click", startQuiz);
   // add event listener to start timer
   document.addEventListener("click", checkAnswer);
 
-//   timeInterval.addEventListener("click", startTimer);
+// timeInterval.addEventListener("click", startTimer);
 
   //call the functions
   openingPage()
