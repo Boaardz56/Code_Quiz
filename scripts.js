@@ -45,13 +45,14 @@ var questions = [
   var startBtn = document.createElement("button");
   //create p tag to display question
   var questionText = document.createElement("p");
-
+  
   //=========================Declaring global variables==========================================
   //variable to store timer #
   var timerLeft = 10;
   //variable to store current index, will start at 0 to start with first question
   var qindex = 0;
- 
+  var currentQuestion = -1;
+  var score = 0;
 
   //=============================== Functions ===================================================
 
@@ -86,7 +87,7 @@ function showTimer() {
             timerLeft--;
             timerEl.textContent = timerLeft + " seconds left";
   // if timer goes down to 0, must clear the variable to stop
-            if(timerLeft === 0) {
+            if (timerLeft === 0) {
                 clearInterval(timeInterval);
                 endTimer();
             }    
@@ -98,12 +99,10 @@ function showTimer() {
 function endTimer() {
     clearInterval(timeInterval);
 
-    var currentQuestion = `"Game over! You got a " + score / 5 + "questions right!"
-    <input type="text" id="name" placeholder="Initials">
-    <button onclick="setScore()">Set score</button>`;
-
-    questionText.textContent = currentQuestion;
+    // score.textContent = 
+ 
 }
+
 //FXN that goes to next question
 function nextQuestion() {
 //declare a variable to store the current questions, then assign it
@@ -157,21 +156,21 @@ function checkAnswer(event) {
 
 // After the game ends, the user can save their initials and score to a highscores view using local storage
 function setScore() {
-    localStorage.setItem("Score", "");
+    localStorage.setItem("Score", score);
     localStorage.setItem("Initials", document.getElementById("initials").value);
     totalScore();
-}
 
 function totalScore() {
-    
+    const one = (score) => {
+        var totalScore = score + "final!";
+        return totalScore;
+    } 
+    var endGame = (totalScore) => {
+        score++;
+    }
+    totalScore = one("initials");
 }
 
-function saveScore() {
-    localStorage.setItem("Score", "");
-    localStorage.setItem("Name", "");
-
-    resetQuiz();
-}
 
 
 
