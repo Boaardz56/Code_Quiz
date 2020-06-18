@@ -48,7 +48,7 @@ var questions = [
 
   //=========================Declaring global variables==========================================
   //variable to store timer #
-  var timerLeft = 60;
+  var timerLeft = 10;
   //variable to store current index, will start at 0 to start with first question
   var qindex = 0;
  
@@ -98,11 +98,11 @@ function showTimer() {
 function endTimer() {
     clearInterval(timeInterval);
 
-    var containerEl = `"Game over! You got a " + score / 5 + "questions right!"
+    var currentQuestion = `"Game over! You got a " + score / 5 + "questions right!"
     <input type="text" id="name" placeholder="Initials">
     <button onclick="setScore()">Set score</button>`;
 
-    containerEl.textContent = quizContent;
+    questionText.textContent = currentQuestion;
 }
 //FXN that goes to next question
 function nextQuestion() {
@@ -128,7 +128,6 @@ function nextQuestion() {
         answersDiv.appendChild(answerBtn);
     }
 
-
     //append div element to container
     containerEl.appendChild(answersDiv);
 
@@ -140,19 +139,6 @@ function checkAnswer(event) {
     console.log(`button text ${event.target.textContent}`);
     console.log(`actual answer ${questions[qindex].answer}`);
   
-    //variable for score total
-    //  var score = 0;
-    // if (event.target.textContent !== questions[qindex].answer) {
-    //     timeLeft -= 5;
-    //     nextQuestion();
-    // }
-
-    // else {
-    //     qindex++;
-    //     score += 1;
-    //     nextQuestion();
-    // }
-
     if (event.target.textContent === questions[qindex].answer) {
         qindex++;
         score += 1;
