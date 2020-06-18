@@ -1,0 +1,32 @@
+body {
+    background-color: blanchedalmond;
+    font-family: Georgia, 'Times New Roman', Times, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: blue;
+    text-shadow: 3px 2px orange;
+    border-width: 1px;
+}
+
+button {
+    padding: 10px 30px;
+    font-family: Georgia, sans-serif;
+    background-color: lightsalmon;
+    color: whitesmoke;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: 3px solid lightyellow;
+    
+}
+
+.timer {
+    padding: 10px;
+    border-bottom: double;
+    border-color: lightyellow;
+    text-align: center;
+
+}

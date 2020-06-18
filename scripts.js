@@ -1,6 +1,11 @@
 //Create questions as an Object. Follow example.
 var questions = [
     {
+        title: "skip",
+        choices: ["No"],
+        answer: "0"
+    },
+    {
         title: "Question 1: What symbol refers to an Id?",
         choices: ["#", "$", ".", "{}"],
         answer: "0"
@@ -43,11 +48,10 @@ var questions = [
 
   //=========================Declaring global variables==========================================
   //variable to store timer #
-  var timerLeft = 10;
+  var timerLeft = 60;
   //variable to store current index, will start at 0 to start with first question
   var qindex = 0;
-  //variable for score total
-  var score = 0;
+ 
 
   //=============================== Functions ===================================================
 
@@ -75,26 +79,31 @@ function startQuiz() {
 //FXN that handles timer
 function showTimer() {
     //display timer
-    timerEl.textContent = timerLeft + "seconds left";
+    timerEl.textContent = timerLeft + " seconds left";
     timerLeft--;
-    console.log("timer starts");
     //create setInterval and store it to a variable
     var timeInterval = setInterval(function() {
             timerLeft--;
-            timerEl.textContent = timerLeft;
+            timerEl.textContent = timerLeft + " seconds left";
   // if timer goes down to 0, must clear the variable to stop
-            if(timerLeft <= 0) {
+            if(timerLeft === 0) {
                 clearInterval(timeInterval);
-                alert("Time's up!");
+                endTimer();
             }    
-    },1000);
-    console.log("timer end");
-
-    
-
-
+    }, 1000);
 };
 
+
+//The timer ends when all questions have been answered or the timer reaches 0.
+function endTimer() {
+    clearInterval(timeInterval);
+
+    var containerEl = `"Game over! You got a " + score / 5 + "questions right!"
+    <input type="text" id="name" placeholder="Initials">
+    <button onclick="setScore()">Set score</button>`;
+
+    containerEl.textContent = quizContent;
+}
 //FXN that goes to next question
 function nextQuestion() {
 //declare a variable to store the current questions, then assign it
@@ -103,7 +112,6 @@ function nextQuestion() {
     containerEl.textContent = "";
 //add current question title to display the variable
     questionText.textContent = currentQuestion.title;
-    // console.log(`index inside next question is ${questionText}}`)
 //append the question display to the container
     containerEl.appendChild(questionText);
 //create a div element to wrap "choices"
@@ -131,35 +139,53 @@ function checkAnswer(event) {
     // if division line with p tag deplays correct answer
     console.log(`button text ${event.target.textContent}`);
     console.log(`actual answer ${questions[qindex].answer}`);
+  
+    //variable for score total
+    //  var score = 0;
+    // if (event.target.textContent !== questions[qindex].answer) {
+    //     timeLeft -= 5;
+    //     nextQuestion();
+    // }
 
-    if (event.target.textConent === questions[qindex].answer) {
+    // else {
+    //     qindex++;
+    //     score += 1;
+    //     nextQuestion();
+    // }
+
+    if (event.target.textContent === questions[qindex].answer) {
         qindex++;
+        score += 1;
         nextQuestion();
-        writeMessage("Correct!");
     }
     else {
 //If a question is answered incorrectly, additional time is subtracted from the timer.
         qindex++;
-        timerEl - 5;
+        timerLeft -= 5;
         nextQuestion();
-        writeMessage("Incorrect!");
     }
  }
 
-function writeMessage(message) {
-    var grade = document.createElement("p");
-    grade.textcontent = message;
-    containerEl.append(grade);
-    var resultTimer = setTimeout(function() {
-        grade.textContent = "";
-    
-    }, 3000);
+
+
+
+// After the game ends, the user can save their initials and score to a highscores view using local storage
+function setScore() {
+    localStorage.setItem("Score", "");
+    localStorage.setItem("Initials", document.getElementById("initials").value);
+    totalScore();
 }
 
+function totalScore() {
+    
+}
 
-//The timer ends when all questions have been answered or the timer reaches 0.
-//After the game ends, the user can save their initials and score to a highscores view using local storage
+function saveScore() {
+    localStorage.setItem("Score", "");
+    localStorage.setItem("Name", "");
 
+    resetQuiz();
+}
 
 
 
