@@ -48,7 +48,7 @@ var questions = [
   
   //=========================Declaring global variables==========================================
   //variable to store timer #
-  var timerLeft = 10;
+  var timerLeft = 60;
   //variable to store current index, will start at 0 to start with first question
   var qindex = 0;
   var currentQuestion = -1;
@@ -89,19 +89,19 @@ function showTimer() {
   // if timer goes down to 0, must clear the variable to stop
             if (timerLeft === 0) {
                 clearInterval(timeInterval);
-                endTimer();
+                // endTimer();
             }    
     }, 1000);
 };
 
 
 //The timer ends when all questions have been answered or the timer reaches 0.
-function endTimer() {
-    clearInterval(timeInterval);
+// function endTimer() {
+//     clearInterval(timeInterval);
 
-    // score.textContent = 
+//     // score.textContent = 
  
-}
+// }
 
 //FXN that goes to next question
 function nextQuestion() {
