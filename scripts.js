@@ -1,14 +1,29 @@
 //Create questions as an Object. Follow example.
 var questions = [
     {
-      title: "Question 1: What symbol refers to an Id",
-      choices: ["#", "$", ".", "{}"],
-      answer: "0"
+        title: "Question 1: What symbol refers to an Id?",
+        choices: ["#", "$", ".", "{}"],
+        answer: "0"
     },
     {
-      title: "Example Question 2:",
-      choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-      answer: "answer from choices"
+        title: "Question 2: If a statment gives an output of 'true', it is a(n):",
+        choices: ["Object", "Number", "String", "Boolean"],
+        answer: "3"
+    },
+    {
+        title: "Question 3: What is the relational operator for not equal to?",
+        choices: ["==/", "!=", "!==", "==!"],
+        answer: "2"
+    },
+    {
+        title: "Question 4: What is the type coercion priority order that Javascript follows?",
+        choices: ["String, Boolean, Number", "Boolean, Number, String", "String, Number, Boolean"],
+        answer: "2"
+    },
+    {
+        title: "Question 5: What is the most current HTML format?",
+        choices: ["3", "5", "6", "4"],
+        answer: "1"
     }
   ];
 
@@ -28,7 +43,7 @@ var questions = [
 
   //=========================Declaring global variables==========================================
   //variable to store timer #
-  var timerLeft = 80;
+  var timerLeft = 10;
   //variable to store current index, will start at 0 to start with first question
   var qindex = 0;
   //variable for score total
@@ -60,16 +75,24 @@ function startQuiz() {
 //FXN that handles timer
 function showTimer() {
     //display timer
-    timerEl.textContent = timerLeft;
+    timerEl.textContent = timerLeft + "seconds left";
+    timerLeft--;
+    console.log("timer starts");
     //create setInterval and store it to a variable
     var timeInterval = setInterval(function() {
             timerLeft--;
             timerEl.textContent = timerLeft;
   // if timer goes down to 0, must clear the variable to stop
-            if(timerLeft === 0) {
+            if(timerLeft <= 0) {
                 clearInterval(timeInterval);
+                alert("Time's up!");
             }    
-    }, 1000);
+    },1000);
+    console.log("timer end");
+
+    
+
+
 };
 
 //FXN that goes to next question
@@ -86,13 +109,13 @@ function nextQuestion() {
 //create a div element to wrap "choices"
     var answersDiv = document.createElement("div");
 //for loop to:
-    for (let i = 0; i < currentQuestion.choices.length; i++) {
+    for (let insideLoop = 0; insideLoop < currentQuestion.choices.length; insideLoop++) {
     //create button elements for each loop
         var answerBtn = document.createElement("button");
     //add a class to each button to be used with eventListener
         answerBtn.classList.add("choiceBtn");
-    //add text to each button from choces
-        answerBtn.textContent = currentQuestion.choices[i];
+    //add text to each button from choices
+        answerBtn.textContent = currentQuestion.choices[insideLoop];
     //append buttons to div element created to wrap choices
         answersDiv.appendChild(answerBtn);
     }
@@ -112,18 +135,19 @@ function checkAnswer(event) {
     if (event.target.textConent === questions[qindex].answer) {
         qindex++;
         nextQuestion();
-        writeMessage("Correct!")
+        writeMessage("Correct!");
     }
     else {
+//If a question is answered incorrectly, additional time is subtracted from the timer.
         qindex++;
-        timer -= 5;
+        timerEl - 5;
         nextQuestion();
-        writeMessage("Incorrect!")
+        writeMessage("Incorrect!");
     }
  }
 
 function writeMessage(message) {
-    var grade = document.createElement("param");
+    var grade = document.createElement("p");
     grade.textcontent = message;
     containerEl.append(grade);
     var resultTimer = setTimeout(function() {
@@ -133,7 +157,8 @@ function writeMessage(message) {
 }
 
 
-
+//The timer ends when all questions have been answered or the timer reaches 0.
+//After the game ends, the user can save their initials and score to a highscores view using local storage
 
 
 
