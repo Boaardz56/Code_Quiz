@@ -159,7 +159,7 @@ function setScore() {
     localStorage.setItem("Score", score);
     localStorage.setItem("Initials", document.getElementById("initials").value);
     totalScore();
-
+}      
 function totalScore() {
     const one = (score) => {
         var totalScore = score + "final!";
