@@ -19,10 +19,11 @@ Work from the index.html, css, and javascript tabs to start creating the coding 
 
 Visual Studio Code was used to create this code quiz, the results as shown!
 
-![Start Quiz](https://user-images.githubusercontent.com/66146854/83951314-9e71a080-a7fe-11ea-9201-552545a4ea27.png "Start Quiz")
+![Start Quiz](https://raw.githubusercontent.com/Boaardz56/Code_Quiz/master/Start%20Quiz.png "Start Quiz")
+![Example] 
 
 
 ## Credits
 
-Stack OverFlow <https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz>
-Site Point <https://www.sitepoint.com/simple-javascript-quiz/>
+[Stack OverFlow Help] (https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz)
+[Site Point Help] (https://www.sitepoint.com/simple-javascript-quiz/)
