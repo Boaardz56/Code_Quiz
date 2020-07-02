@@ -48,7 +48,6 @@ var questions = [
   var timerLeft = 60;
   //variable to store current index, will start at 0 to start with first question
   var qindex = 0;
-  var currentQuestion = -1;
   var score = 0;
 
   //=============================== Functions ===================================================
@@ -69,7 +68,7 @@ function openingPage() {
 function startQuiz() {
     qindex = 0;
     //show timer fxn
-    showTimer();
+    // showTimer();
     timeInterval = setInterval(showTimer, 1000)
     //call next question function
     nextQuestion();
@@ -78,12 +77,12 @@ function startQuiz() {
 //FXN that handles timer
 function showTimer() {
     //display timer
+    timerLeft--;
     timerEl.textContent = timerLeft + " seconds left";
 
   // if timer goes down to 0, must clear the variable to stop
             if (timerLeft === 0) {
                 clearInterval(timeInterval);
-                // endTimer();
             }    
     
 }
@@ -152,8 +151,8 @@ function endQuiz() {
     var scoreTotal = document.getElementById('scoreTotal');
     scoreTotal.textConcent = score;
 
-    var totalScore = JSON.parse(localStorage.getItem('totalScore')) || [];
-    totalScore = localStorage.setItem(score);
+    // var totalScore = JSON.parse(localStorage.getItem('totalScore')) || [];
+    // totalScore = localStorage.setItem(score);
 }
 
 
