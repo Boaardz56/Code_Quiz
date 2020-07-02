@@ -1,11 +1,6 @@
 //Create questions as an Object. Follow example.
 var questions = [
-    {
-        title: "skip",
-        choices: ["No"],
-        answer: "0"
-    },
-    {
+       {
         title: "Question 1: What symbol refers to an Id?",
         choices: ["#", "$", ".", "{}"],
         answer: "0"
@@ -37,6 +32,8 @@ var questions = [
   var containerEl = document.querySelector(".container");
   //Hook timer element
   var timerEl = document.querySelector(".timer");
+  
+  var timeInterval;
 
   //=====================Creating dynamic elements ==============================================
     //create h1 to show starting heading
@@ -73,6 +70,7 @@ function startQuiz() {
     qindex = 0;
     //show timer fxn
     showTimer();
+    timeInterval = setInterval(showTimer, 1000)
     //call next question function
     nextQuestion();
 }
@@ -81,27 +79,15 @@ function startQuiz() {
 function showTimer() {
     //display timer
     timerEl.textContent = timerLeft + " seconds left";
-    timerLeft--;
-    //create setInterval and store it to a variable
-    var timeInterval = setInterval(function() {
-            timerLeft--;
-            timerEl.textContent = timerLeft + " seconds left";
+
   // if timer goes down to 0, must clear the variable to stop
             if (timerLeft === 0) {
                 clearInterval(timeInterval);
                 // endTimer();
             }    
-    }, 1000);
-};
+    
+}
 
-
-//The timer ends when all questions have been answered or the timer reaches 0.
-// function endTimer() {
-//     clearInterval(timeInterval);
-
-//     // score.textContent = 
- 
-// }
 
 //FXN that goes to next question
 function nextQuestion() {
@@ -125,6 +111,7 @@ function nextQuestion() {
         answerBtn.textContent = currentQuestion.choices[insideLoop];
     //append buttons to div element created to wrap choices
         answersDiv.appendChild(answerBtn);
+        answerBtn.onclick = checkAnswer
     }
 
     //append div element to container
@@ -135,23 +122,38 @@ function nextQuestion() {
 //FXN to check the answer and display to following question
 function checkAnswer(event) {
     // if division line with p tag deplays correct answer
-    console.log(`button text ${event.target.textContent}`);
-    console.log(`actual answer ${questions[qindex].answer}`);
   
     if (event.target.textContent === questions[qindex].answer) {
-        qindex++;
-        score += 1;
-        nextQuestion();
+        score ++;
+    
     }
     else {
 //If a question is answered incorrectly, additional time is subtracted from the timer.
-        qindex++;
         timerLeft -= 5;
+    }
+    qindex++;
+
+    if (qindex===questions.length){
+        //quiz end
+        endQuiz();
+    }else{
+        //go to next question
         nextQuestion();
     }
  }
 
+function endQuiz() {
+    containerEl.setAttribute('style', 'display:none');
+    timerEl.setAttribute('style','display:none');
 
+    var result = document.getElementById('results');
+    result.style.display = 'block';
+    //create score total element
+    var scoreTotal = document.getElementById('scoreTotal');
+    scoreTotal.textConcent = score;
+
+    //var totalScore = JSON.parse(localStorage.getItem('totalScore')) || [];
+}
 
 
 // After the game ends, the user can save their initials and score to a highscores view using local storage
