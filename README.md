@@ -19,8 +19,8 @@ Work from the index.html, css, and javascript tabs to start creating the coding 
 
 Visual Studio Code was used to create this code quiz, the results as shown!
 
-![Start Quiz](https://raw.githubusercontent.com/Boaardz56/Code_Quiz/master/Start%20Quiz.png "Start Quiz")
-![Example](https://raw.githubusercontent.com/Boaardz56/Code_Quiz/master/Example.png  "Example Question")
+![Start Quiz](https://raw.githubusercontent.com/Boaardz56/Code_Quiz/master/Images/Start%20Quiz.png "Start Quiz")
+![Example](https://raw.githubusercontent.com/Boaardz56/Code_Quiz/master/Images/Example.png "Example Question")
 
 
 ## Credits

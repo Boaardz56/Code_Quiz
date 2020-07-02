@@ -152,26 +152,27 @@ function endQuiz() {
     var scoreTotal = document.getElementById('scoreTotal');
     scoreTotal.textConcent = score;
 
-    //var totalScore = JSON.parse(localStorage.getItem('totalScore')) || [];
+    var totalScore = JSON.parse(localStorage.getItem('totalScore')) || [];
+    totalScore = localStorage.setItem(score);
 }
 
 
-// After the game ends, the user can save their initials and score to a highscores view using local storage
-function setScore() {
-    localStorage.setItem("Score", score);
-    localStorage.setItem("Initials", document.getElementById("initials").value);
-    totalScore();
-}      
-function totalScore() {
-    const one = (score) => {
-        var totalScore = score + "final!";
-        return totalScore;
-    } 
-    var endGame = (totalScore) => {
-        score++;
-    }
-    totalScore = one("initials");
-}
+// // After the game ends, the user can save their initials and score to a highscores view using local storage
+// function setScore() {
+//     localStorage.setItem("Score", score);
+//     localStorage.setItem("Initials", document.getElementById("initials").value);
+//     totalScore();
+// }      
+// function totalScore() {
+//     const one = (score) => {
+//         var totalScore = score + "final!";
+//         return totalScore;
+//     } 
+//     var endGame = (totalScore) => {
+//         score++;
+//     }
+//     totalScore = one("initials");
+// }
 
 
 
